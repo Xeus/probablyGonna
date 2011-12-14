@@ -160,7 +160,7 @@ end
 
 DataMapper.finalize
 #DataMapper.auto_upgrade!
-DataMapper.auto_migrate!
+#DataMapper.auto_migrate!
 
 
 # from http://stackoverflow.com/questions/279769/convert-to-from-datetime-and-time-in-ruby
