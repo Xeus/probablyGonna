@@ -1,0 +1,37 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: profile</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<B>about: <%= @user.name %></B> <button>contact</button><BR />
+
+<STRONG>Location</STRONG>: <%= @user.city %>, <%= @user.state %><BR />
+<STRONG>Events Attended</STRONG> <%= @user.events_attended %><BR />
+<STRONG>Events Planned</STRONG> <%= @user.events_planned %><BR />
+<STRONG>Events Ditched</STRONG> <%= @user.events_ditched %><BR /><BR />
+
+<%
+t = Time.at(@user.time_created)
+timeCreated = t.strftime("%m/%d/%Y @ %I:%M%p")
+%>
+<STRONG>Account Created</STRONG> <%= timeCreated %><BR />
+
+<script type="text/javascript">
+
+$(function() {
+});
+
+</script>
+
+</BODY>
+
+</HTML>

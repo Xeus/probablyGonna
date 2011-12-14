@@ -1,0 +1,92 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: plan an event</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		BODY, INPUT, OPTION { font-family: 'Questrial', sans-serif; }
+      INPUT { font-size: 10pt;}
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<CENTER>
+
+<H3>probablyGonna plan...</H3>
+
+<FORM ACTION="./plan/save" METHOD="post" NAME="planForm" ID="planForm">
+<LABEL>event name:</LABEL> <INPUT TYPE="text" NAME="name" /><BR />
+<!--
+<LABEL>city:</LABEL> <input type="text" name="city" /><BR />
+<LABEL>state:</LABEL> <input type="text" name="state" /><BR />
+-->
+<INPUT TYPE="hidden" NAME="cityName" VALUE="New York"><BR />
+<LABEL>neighborhood:</LABEL>
+
+<SELECT NAME="neighborhood">
+<% if (@cities.length == 0) %>
+	<OPTION VALUE="">(empty)</OPTION>
+<% else
+  @cities.each do |city|
+%>
+	<OPTION VALUE="<%= city.neighborhood %>"><%= city.neighborhood %></OPTION>
+<%
+  end
+end
+%>
+</SELECT>
+<BR /><BR />
+
+<LABEL>activity:</LABEL>
+<SELECT NAME="activity">
+<% $activities.each do |activity| %>
+	<OPTION VALUE="<%= activity %>"><%= activity %></OPTION>
+<% end %>
+</SELECT>
+<BR /><BR />
+
+<LABEL>when?:</LABEL>
+<SELECT NAME="timeList">
+<% $timeList.each do |timeList| %>
+	<OPTION VALUE="<%= timeList %>"><%= timeList %></OPTION>
+<% end %>
+</SELECT>
+<BR /><BR />
+
+<LABEL>contact?: [<A ID="contact_default">use your profile defaults</A>]</LABEL><BR />
+<% $contact.each do |contact| %>
+<INPUT TYPE="checkbox" NAME="contactList[]" VALUE="<%= contact %>" /> <%= contact %>
+<INPUT TYPE="text" NAME="contact_<%= contact %>"><BR />
+<% end %>
+OR!<BR />
+<INPUT TYPE="checkbox" NAME="contactList[]" VALUE="anonymous" /> anonymous email
+<INPUT TYPE="hidden" NAME="contact_anonymous" VALUE="anonymous">
+
+<BR /><BR /><INPUT TYPE="submit" VALUE="create your event plan!" CLASS="ui-button-text" NAME="submitButton" />
+</FORM>
+
+<DIV ID="postEvent" STYLE="display: none;">Your event has been posted!</DIV>
+
+</CENTER>
+
+<script type="text/javascript">
+
+$(function() {
+  $("input:submit").button();
+  $("#planForm").submit(function() {
+    $.post('/plan/save', $("#planForm").serialize(), function(data) {
+      $("#postEvent").show();
+    });
+    return false;
+  });
+  $('input:text:first').focus();
+});
+
+</script>
+
+</BODY>
+
+</HTML>

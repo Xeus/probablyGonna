@@ -1,0 +1,79 @@
+--- 
+- name: New York
+  id: 1
+  neighborhood: Greenwich Village
+- name: Washington, DC
+  id: 2
+  neighborhood: Logan Circle
+- name: New York
+  id: 3
+  neighborhood: East Village
+- name: New York
+  id: 4
+  neighborhood: Gramercy
+- name: New York
+  id: 5
+  neighborhood: Lower East Side
+- name: New York
+  id: 6
+  neighborhood: Chelsea
+- name: New York
+  id: 7
+  neighborhood: Upper East Side
+- name: New York
+  id: 8
+  neighborhood: Upper West Side
+- name: New York
+  id: 9
+  neighborhood: Harlem
+- name: New York
+  id: 10
+  neighborhood: TriBeCa
+- name: New York
+  id: 11
+  neighborhood: Midtown
+- name: New York
+  id: 12
+  neighborhood: Hell's Kitchen
+- name: New York
+  id: 13
+  neighborhood: Washington Heights
+- name: New York
+  id: 14
+  neighborhood: Spanish Harlem
+- name: Washington, DC
+  id: 15
+  neighborhood: Logan Circle
+- name: Washington, DC
+  id: 16
+  neighborhood: Dupont Circle
+- name: Washington, DC
+  id: 17
+  neighborhood: Georgetown
+- name: Washington, DC
+  id: 18
+  neighborhood: U Street
+- name: Washington, DC
+  id: 19
+  neighborhood: Adams Morgan
+- name: Washington, DC
+  id: 20
+  neighborhood: Van Ness
+- name: Washington, DC
+  id: 21
+  neighborhood: Cleveland Park
+- name: Washington, DC
+  id: 22
+  neighborhood: Columbia Heights
+- name: New York
+  id: 23
+  neighborhood: SoHo
+- name: New York
+  id: 24
+  neighborhood: Alphabet City
+- name: New York
+  id: 25
+  neighborhood: Chinatown
+- name: New York
+  id: 26
+  neighborhood: Stuyvesant Town

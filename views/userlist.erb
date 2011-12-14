@@ -1,0 +1,32 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: user list</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<STRONG>probablyGonna User List</STRONG><BR /><BR />
+
+<% for user in @user %>
+
+<B><%= user.name %></B> <button>contact</button><BR /> (<%= user.city %>, <%= user.state %>)<BR /><BR />
+
+<% end %>
+
+<script type="text/javascript">
+
+$(function() {
+});
+
+</script>
+
+</BODY>
+
+</HTML>

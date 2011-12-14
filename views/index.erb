@@ -1,0 +1,53 @@
+<HTML>
+
+<HEAD>
+<%= $header %>
+    <TITLE>ProbablyGonna :: Welcome</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		BODY, INPUT, OPTION { font-family: 'Questrial', sans-serif; }
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<%= $toolbar %>
+
+<TABLE BORDER=0 WIDTH=100%><TR>
+<TD VALIGN=top>
+
+<DIV ID="leftSide">
+
+</DIV>
+
+</TD><TD VALIGN=top>
+
+<DIV ID="middleSide">
+
+Welcome!  <A HREF="plan">Start planning</A> an event.
+
+</DIV>
+
+ </TD><TD VALIGN=top>
+
+ <DIV ID="rightSide">
+
+ </DIV>
+
+ </TD>
+ </TR></TABLE>
+
+<%= $footer %>
+
+<script type="text/javascript">
+
+$(function() {
+	$("input:submit").button();
+});
+
+</script>
+
+</BODY>
+
+</HTML>

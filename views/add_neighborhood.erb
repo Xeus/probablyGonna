@@ -1,0 +1,55 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: add neighborhood</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		BODY, INPUT, OPTION { font-family: 'Questrial', sans-serif; }
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<%= toolbar %>
+
+<%= @output %>
+
+<FORM ACTION="./add_neighborhood" METHOD="post" NAME="addForm">
+<INPUT TYPE="hidden" VALUE="true" NAME="posted" />
+
+<LABEL>city:</LABEL><BR />
+<SELECT NAME="cityName">
+  <OPTION VALUE="New York">[select a city]</OPTION>
+<% for city in $cities do %><OPTION VALUE="<%= city %>"><%= city %></OPTION><% end %>
+</SELECT><BR /><BR />
+
+<LABEL>neighborhood:</LABEL><BR />
+<INPUT TYPE="text" NAME="neighborhood">
+
+<BR /><BR /><INPUT TYPE="submit" VALUE="add a neighborhood" CLASS="ui-button-text" NAME="submitButton" />
+</FORM>
+
+<%= $footer %>
+
+<script type="text/javascript">
+
+$(function() {
+	$("input:submit").button();
+	$("#navAbout").click(function() {
+		window.location='/about';
+	});
+	$("#navEvents").click(function() {
+		window.location='/be';
+	});
+	$("#navPlan").click(function() {
+		window.location='/plan';
+	});
+});
+
+</script>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,306 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: events</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		BODY, INPUT, OPTION { font-family: 'Questrial', sans-serif; }
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<%= toolbar %>
+
+<CENTER><TABLE BORDER=0 CLASS="layoutTable" WIDTH=90%><TR><TD VALIGN=top>
+
+<DIV ID="leftSide">
+
+<BR /><STRONG>events right now!</STRONG><BR />
+
+<%
+if !@eventsRightNow.all.empty?
+		for eventsRightNow in @eventsRightNow %>
+<DIV CLASS="eventBox">
+<SPAN CLASS="eventName"><%= eventsRightNow.name %></SPAN> <button id="joinRightNow<%= eventsRightNow.id %>" class="eventButton">join</button><button id="commentButtonRightNow<%= eventsRightNow.id %>" class="commentButton eventButton" title="read comments">comments</button><BR />
+<%= eventsRightNow.activity %> in <%= eventsRightNow.neighborhood %>, <%= eventsRightNow.city %><BR />
+<%
+t = eventsRightNow.time_list_timestamp
+timeEvent = t.strftime("%m/%d/%Y")
+%>
+<%= eventsRightNow.time_list %> (<%= timeEvent %>)<BR />
+
+<SPAN CLASS="eventMetadata">
+<STRONG>organized by: </STRONG> <%= eventsRightNow.organizers %><BR />
+<%
+t = Chronic.parse(eventsRightNow.time_created)
+timeCreated = t.strftime("%m/%d/%Y")
+#getName = User.get(:id => event.author_id)
+#@eventAuthorName = getName.name
+%>
+<STRONG>created by: </STRONG> <%= eventsRightNow.author_id %> on <%= timeCreated %>
+</SPAN>
+
+<DIV ID="commentsSection<%= eventsRightNow.id %>" STYLE="display: none;">
+
+<BR />
+<H3>Comments</H3>
+
+<%
+@comment = Comment.all(:id => eventsRightNow.id)
+@comment.length.times do |i| %>
+<%= @comment.name %><BR />
+<%= @comment.comment %><BR />
+<% end %>
+
+<FORM ACTION="./plan/addcomment" METHOD="post" NAME="commentForm" ID="commentForm<%= commentID %>">
+your comment:<BR />
+<TEXTAREA ID="comment" NAME="comment" ROWS=5 COLS=40></TEXTAREA>
+<BR /><INPUT TYPE="submit" VALUE="send" CLASS="ui-button-text" NAME="submitButton" />
+</FORM>
+
+<% end %>
+
+</DIV> <!-- end #commentsSection Right Now -->
+
+</DIV> <!-- end .eventBox -->
+
+<% else %>
+No events are available.
+<% end %>
+
+<BR /><BR /><STRONG>events today</STRONG><BR />
+
+<%
+if !@eventsToday.all.empty?
+	for eventsToday in @eventsToday %>
+<DIV CLASS="eventBox">
+<SPAN CLASS="eventName"><%= eventsToday.name %></SPAN> <button id="joinToday<%= eventsToday.id %>" class="eventButton">join</button><button id="commentButtonToday<%= eventsToday.id %>" class="commentButton eventButton" title="read comments">comments</button><BR />
+<%= eventsToday.activity %> in <%= eventsToday.neighborhood %>, <%= eventsToday.city %><BR />
+<%
+t = eventsToday.time_list_timestamp
+timeEvent = t.strftime("%m/%d/%Y")
+%>
+<%= eventsToday.time_list %> (<%= timeEvent %>)<BR />
+
+<SPAN CLASS="eventMetadata">
+<STRONG>organized by: </STRONG> <%= eventsToday.organizers %><BR />
+<%
+t = Chronic.parse(eventsToday.time_created)
+timeCreated = t.strftime("%m/%d/%Y")
+#getName = User.get(:id => event.author_id)
+#@eventAuthorName = getName.name
+%>
+<STRONG>created by: </STRONG> <%= eventsToday.author_id %> on <%= timeCreated %>
+</SPAN>
+
+<DIV ID="commentsSection<%= eventsToday.id %>" STYLE="display: none;">
+
+<BR />
+<H3>Comments</H3>
+
+<%
+@comments = Comments.all(:id => eventsToday.id)
+@comments.length.times do |i| %>
+<%= @comments.name %><BR />
+<%= @comments.comment %><BR />
+<% end %>
+
+<FORM ACTION="./plan/addcomment" METHOD="post" NAME="commentForm">
+your comment:<BR />
+<TEXTAREA ID="comment" NAME="comment" ROWS=5 COLS=40></TEXTAREA>
+<BR /><INPUT TYPE="submit" VALUE="send" CLASS="ui-button-text" NAME="submitButton" />
+</FORM>
+
+<% end %>
+
+</DIV> <!-- end #commentsSection Today -->
+
+</DIV> <!-- end .eventBox -->
+
+<% else %>
+No events are available.
+<% end %>
+
+</DIV>
+
+</TD><TD VALIGN=top WIDTH=500>
+
+<DIV ID="middleSide">
+
+<CENTER>
+
+<STRONG>find an event...</STRONG><BR />
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+<TR><TH>...during...</TH><TH>...doing...</TH><TH>...in...</TH></TR>
+<TR>
+<TD><SELECT NAME=onDate ID=onDate>
+<OPTION VALUE="any">(any time)</OPTION>
+<% for timeList in $timeList do %><OPTION VALUE="<%= timeList %>"><%= timeList %></OPTION><% end %>
+</SELECT></TD><TD><SELECT NAME=doing ID=doing>
+<OPTION VALUE="any">(any activity)</OPTION>
+<% $activities.each do |activity| %>
+	<OPTION VALUE="<%= activity %>"><%= activity %></OPTION>
+<% end %>
+</SELECT></TD><TD><SELECT NAME=inCity ID=inCity>
+<OPTION VALUE="any">(any city)</OPTION>
+<% for city in $cities do %><OPTION VALUE="<%= city %>"><%= city %></OPTION>
+<% for n in Cities.all(:name => city, :order => :neighborhood.asc) do %><OPTION VALUE="<%= n.neighborhood %>">- <%= n.neighborhood %></OPTION>
+<%
+end
+end %></SELECT></TD></TR>
+</TABLE>
+
+</CENTER>
+
+<BR /><BR />
+
+<H3><%= @title %>:</H3><BR /><BR />
+
+<%
+if !@event.all.empty?
+
+	for event in @event
+		%>
+<DIV CLASS="eventBox">
+<SPAN CLASS="eventName"><%= event.name %></SPAN> <button class="join<%= event.id %> eventButton" name="join<%= event.id %>"><% if (event.userlinks(:user_id => session[:user_id]) == nil) %>attending<% else %>join<% end %></button><button id="commentButton<%= event.id %>" class="commentButton eventButton" title="read comments">comments</button><BR />
+<%= event.activity %> in <%= event.neighborhood %>, <%= event.city %><BR />
+<!-- <%= event.address %><BR /> -->
+<%
+t = Time.at(event.time_list_timestamp)
+timeEvent = t.strftime("%m/%d/%Y @ %I:%M%p")
+%>
+<%= event.time_list %> (<%= timeEvent %>)<BR />
+
+<SPAN CLASS="eventMetadata">
+<STRONG>organized by: </STRONG> <%= event.organizers %><BR />
+<%
+t = Chronic.parse(event.time_created)
+#  @ %I:%M%p
+timeCreated = t.strftime("%m/%d/%Y")
+getName = User.get(event.author_id)
+@eventAuthorName = getName.name
+%>
+<STRONG>created by: </STRONG> <A CLASS="user<%= event.author_id %>" HREF="javascript:return false;"><%= @eventAuthorName %></A> on <%= timeCreated %>
+</SPAN>
+
+<DIV ID="commentsSection<%= event.id %>" STYLE="display: none;">
+
+<BR />
+<H3>Comments</H3>
+<BR /><BR />
+<%
+	for eventComment in event.comments.all
+event.comments.all.length.times do |i|
+		t = eventComment.time_posted
+		timeEvent = t.strftime("%m/%d/%Y @ %I:%M%p")
+%>
+<B><%= eventComment.name %></B> <SPAN STYLE="font-size: smaller;">(<%= timeEvent %>)</SPAN><BR />
+<%= eventComment.comment %><BR /><BR />
+<% end %>
+
+<% end %>
+
+<FORM ACTION="./be/addcomment" METHOD="post" NAME="commentForm<%= event.id %>" ID="commentForm<%= event.id %>">
+<INPUT TYPE="hidden" NAME="event_id" VALUE="<%= event.id %>">
+your comment:<BR />
+<TEXTAREA ID="comment" NAME="comment" ROWS=5 COLS=40></TEXTAREA>
+<BR /><INPUT TYPE="submit" VALUE="send" CLASS="ui-button-text" NAME="submitButton" />
+</FORM>
+
+</DIV> <!-- end #commentsSection -->
+
+</DIV> <!-- end .eventBox -->
+<BR />
+
+
+<% end %>
+
+<% else %>
+No events are available.
+<% end %>
+
+</DIV>
+
+</TD>
+<TD VALIGN=top WIDTH=300>
+
+<DIV ID="rightSide">
+
+</DIV>
+
+</TD>
+</TR></TABLE></CENTER>
+
+<%= $footer %>
+
+<script type="text/javascript">
+
+$(function() {
+<%
+	if !@event.all.empty?
+		for event in @event %>
+			$(".join<%= event.id %>").click(function() {
+				$(".join<%= event.id %>").toggle(function() {
+					$(".join<%= event.id %>").text('attending').button();
+					$.get('/be/attending/<%= event.id %>');
+				}, function() {
+					$(".join<%= event.id %>").text('join').button();
+					$.get('/be/attending/<%= event.id %>');
+				});
+			});
+			$("#commentButton<%= event.id %>").click(function() {
+			$("#commentsSection<%= event.id %>").toggle();
+		});
+	<% end
+	end %>
+
+	$(".eventButton").button();
+	$(".commentButton").button({
+    icons: {
+      primary: "ui-icon-comment"
+    },
+      text: false
+  });
+	$("#onDate").change(function() {
+		window.location='/be/on/' + $(this).val();
+	});
+	$("#doing").change(function() {
+		window.location='/be/doing/' + $(this).val();
+	});
+	$("#inCity").change(function() {
+		window.location='/be/in/' + $(this).val();
+	});
+	$("#navAbout").click(function() {
+		$("#middleSide").load("/about");
+		return false;
+	});
+	$("#navEvents").click(function() {
+		window.location="/be";
+		return false;
+	});
+	$("#navPlan").click(function() {
+		$("#rightSide").load("/plan");
+		return false;
+	});
+	$("#navUsers").click(function() {
+		$("#rightSide").load("/user");
+		return false;
+	});
+	<!-- need to fix this so it does not call all users -->
+	$("#rightSide").load("/user/<%= session[:user_id] %>");
+	<% for user in User.all %>
+	$(".user<%= user.id %>").click(function() {
+		$("#rightSide").load("/user/<%= user.id %>");
+		return false;
+	});
+	<% end %>
+});
+
+</script>
+
+</BODY>
+
+</HTML>

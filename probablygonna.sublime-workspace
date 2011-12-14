@@ -1,0 +1,408 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "require 'rubygems'\nrequire 'sinatra'\nrequire 'dm-core'\n\nDataMapper::setup(:default, {:adapter => 'yaml', :path => 'db'})\n\nclass User\n  include DataMapper::Resource\n\n  property :id, Serial\n  property :name, String\n  property :contactEmail, String\n  property :contactPhone, String\n  property :contactTwitter, String\n  property :city, String\n  property :state, String\n  property :timeCreated, Time\n  property :eventsAttended, Integer\n  property :eventsPlanned, Integer\n  property :eventsDitched, Integer\nend\nDataMapper.finalize\n\nclass Event\n  include DataMapper::Resource\n\n  property :id, Serial\n  property :name, String\n  property :neighborhood, String\n  property :city, String\n  property :state, String\n  property :activity, String\n  property :authorID, Integer\n  property :organizers, String\n  property :date, String\n  property :time, Time\n  property :timeCreated, Time\n  property :attendance, Integer\n  property :occurred, String\nend\nDataMapper.finalize\n\nclass EventLog\n  include DataMapper::Resource\n  property :id, Serial\n  property :eventID, Integer\n  property :feedbackUserID, Integer\n  property :feedback, String\n  property :review, Integer\nend\nDataMapper.finalize\n\nclass City\n  include DataMapper::Resource\n  property :id, Serial\n  property :neighborhood, String\nend\nDataMapper.finalize\n\nget '/' do\n  <<-HTML\n  Nothing here yet.\n  HTML\nend\n\nget '/register' do\n\nend\n\nget '/plan' do\n  @city = City.new\n  erb :plan\nend\n\npost '/plan/save' do\n  e = Event.new\n  e.name = params[:name]\n  e.title = params[:title]\n  e.save\n\n  output = \"\"\n  for employee in Employee.all\n    output += employee.name + \"<br />\"\n    output += employee.title + \"<br />\"\n  end\n  output\nend\n\n\n",
+			"file": "app.rb",
+			"file_size": 2151,
+			"file_write_time": 1322548393000000,
+			"settings":
+			{
+				"buffer_size": 1668,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pub/plan.html",
+			"settings":
+			{
+				"buffer_size": 519,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": true,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/benturner/Dropbox/Code/commlabweb/sinatra/class4/app.rb",
+		"/Users/benturner/Dropbox/Code/commlabweb/sinatra/modeltest.rb",
+		"/Users/benturner/Downloads/app.rb",
+		"/Users/benturner/Dropbox/Code/commlabweb/sinatra/app2.rb",
+		"/Users/benturner/Downloads/app 2.rb",
+		"/Volumes/ITP/sinatra/class4/db/rectangles.yml",
+		"/Volumes/ITP/sinatra/class4/db/employees.yml",
+		"/Volumes/ITP/sinatra/app.rb",
+		"/Volumes/ITP/sinatra/class4/config.ru",
+		"/Volumes/ITP/sinatra/class4/app.rb",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/index.php",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/templates/browser.ejs",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/templates/browserbackup.ejs",
+		"/Volumes/coalbare3.com/etherpad/src/static/css/file-browser.less",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/static/js/snippets/file-script.ejs",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/static/js/snippets/file-rundown.ejs",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/update.php",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/help.php",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/results_body.php",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/static/js/ncsNav.js",
+		"/Volumes/coalbare3.com/etherpad/src/static/css/file-browser.css",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/controllers/browser.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/static/css/browser.css",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/templates/tabs.ejs",
+		"/Users/benturner/Dropbox/Code/commlabweb/hw.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/candy/index.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/candy/db_real.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/candy/compare.sql",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/candy/README",
+		"/Users/benturner/Library/Application Support/Sublime Text 2/Packages/Default/Base File.sublime-settings",
+		"/Users/benturner/Library/Application Support/Sublime Text 2/Packages/Default/Global.sublime-settings",
+		"/Users/benturner/Dropbox/Code/commlabweb/wk3_nytnyp.txt",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/recipes.php",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/quests.php",
+		"/Users/benturner/Dropbox/Code/PComp/wheredipuddit/db.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/header2.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/main.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/head.php",
+		"/Users/benturner/Dropbox/Code/commlabweb/wk1_probablygonna.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/vars.php",
+		"/Users/benturner/Dropbox/Code/PComp/Wheredipuddit/index.php",
+		"/Users/benturner/Dropbox/Code/PComp/Wheredipuddit/update.php",
+		"/Users/benturner/Dropbox/Code/weredipuddit.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/evolutions.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/add_book.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/update_goal.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/update_finance.php",
+		"/Users/benturner/Documents/Mesh/Galapag.us/update_profile.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/itpblogs.xml",
+		"/Users/benturner/Dropbox/Code/commlabweb/wk1_recipe.php",
+		"/Users/benturner/Documents/Coding/projects/android-sdk-mac_86/tools/ant/build.xml",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/browser.js",
+		"/Users/benturner/Dropbox/Code/commlabweb/about.php",
+		"/Users/benturner/Dropbox/Code/commlabweb/baseballcard.html",
+		"/Users/benturner/Documents/Mesh/Galapag.us/index.php",
+		"/Users/benturner/Dropbox/Backup Files/ITP/itpblogs.xml",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/rundown.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/layout.js",
+		"/Users/benturner/Documents/Mesh/benturner.com/robinhood/rh_hut.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/contact_me.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/contact_me_proc.php",
+		"/Users/benturner/Downloads/google-reader-subscriptions.xml",
+		"/Users/benturner/Dropbox/Code/commlabweb/about.html",
+		"/Users/benturner/Dropbox/Code/commlabweb/wk1.sublime-project",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/testtwitterapi4.php",
+		"/Users/benturner/Dropbox/Code/commlabweb/wk1.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/board.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/testtwitterapi.txt",
+		"/Volumes/coalbare3.com/etherpad/src/static/js/grid_collab_client.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/wikiStyleLinks/hooks.js",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/testtwitterapi2.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/itpsmell_last.txt",
+		"/Users/benturner/Documents/Mesh/benturner.com/dc/index.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/dc/stats.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/dc/twitter.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/testtwitterapi.php",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/anna.txt",
+		"/Users/benturner/Documents/Mesh/benturner.com/other/susan.txt",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/controllers/indexer.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/controllers/paddocument.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/controllers/searchfiles.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/controllers/padindexer.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/findCitations/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/twitterStyleTags/hooks.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/twitterStyleTags/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/spellcheck/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/controllers/browser.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/query/controllers/enpsdocument.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/tab.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/rundown.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/slick.grid.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/romsg.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/printgrid.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/ncsserv.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/ncs.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/frankxml2json.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/elementsonly.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/datapads.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/rdgridrows.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/rundowntests.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/rdgrid.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/slick.core.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/slick.rowmovemanager.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/jquery.hotkeys.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/rdalone.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/static/js/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/env.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/controllers/datafiles.js",
+		"/Volumes/coalbare3.com/etherpad/src/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/themes/cr/templates/500_body.ejs",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/controllers/tabs.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/controllers/cat.js",
+		"/Library/WebServer/Documents/phpinfo_ben.php",
+		"/Library/WebServer/Documents/index.html",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/navigateByImageContent/main.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/navigateByImageContent/hooks.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/mos/controllers/mos.js",
+		"/Volumes/coalbare3.com/etherpad/src/etherpad/collab/collabroom_server.js",
+		"/Users/benturner/Downloads/Pita-etherpad-lite-fb158d2/README.md",
+		"/Volumes/coalbare3.com/etherpad/src/etherpad/collab/collab_server.js",
+		"/Volumes/coalbare3.com/etherpad/src/etherpad/control/pad/pad_control.js",
+		"/Users/benturner/Dropbox/Code/node/testserver.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/time.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/rundown/hooks.js",
+		"/Volumes/coalbare3.com/etherpad/src/plugins/enpsfiles/controllers/collab.js"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"label",
+			"actions:hover",
+			"options",
+			"candy",
+			"8",
+			"three",
+			"actions",
+			"you have",
+			"window.location.href.indexOf(fileData.padID)",
+			"log.info",
+			"border",
+			"<div",
+			"<BR>",
+			"<br>",
+			"invalidateAllRows()",
+			"refresh",
+			"freeze",
+			"rographic",
+			"slug",
+			"log.info",
+			"candy",
+			"candy_form",
+			"candy1_overall_record_final",
+			"candy2_overall_record_final",
+			"candy2_record_final",
+			"candy1_record_final",
+			"candy_random",
+			"overall_losses",
+			"overall_wins",
+			"button_comp",
+			"candy_name",
+			"candies",
+			"CandyRecord",
+			"candy",
+			"button_candy",
+			"candy_header",
+			"paste",
+			"slidetoggle",
+			"toggleFiles",
+			"el",
+			"before",
+			"ajaxrequestfiles",
+			"jstree"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"LABEL",
+			"compForm",
+			"comp1OverallRecordFinal",
+			"comp2OverallRecordFinal",
+			"comp2RecordFinal",
+			"comp1RecordFinal",
+			"compRandom",
+			"overallLosses",
+			"overallWins",
+			"buttonComp",
+			"compName"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app.rb",
+					"settings":
+					{
+						"buffer_size": 1668,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1391,
+								1391
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 511.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "pub/plan.html",
+					"settings":
+					{
+						"buffer_size": 519,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								519,
+								519
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.516256083226,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/benturner/Documents/Mesh/benturner.com/other/candy/index.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 114.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,56 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: register</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY><BR />
+
+<CENTER>
+
+<H1>Register on probablyGonna</H1>
+
+    <form action="/register/save" method="post">
+      <p>
+        <label>Username: </label>
+        <input type="text" name="user_name"/>
+      </p>
+      <p>
+        <label>Password: </label>
+        <input type="password" name="password"/>
+      </p>
+      <p>
+        <input type="submit" name="login" value="register" />
+      </p>
+    </form>
+
+</CENTER>
+
+<%= $footer %>
+
+<script type="text/javascript">
+
+$(function() {
+  $("input:submit").button();
+	$("#navAbout").click(function() {
+		window.location='/about';
+	});
+	$("#navEvents").click(function() {
+		window.location='/be';
+	});
+	$("#navPlan").click(function() {
+		window.location='/plan';
+	});
+});
+
+</script>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,32 @@
+--- 
+- city: New York
+  name: End of Finals Clubbing!
+  time_list: this Friday
+  contact_twitter: "@xeus"
+  time_created: Fri Dec 09 12:03:29 -0500 2011
+  attendees: 
+  activity: dancing
+  id: 1
+  organizers: Ben Turner
+  contact_phone: 555-5555
+  contact_list: email, phone, twitter
+  neighborhood: East Village
+  author_id: 1
+  contact_email: test@test.com
+  time_list_timestamp: 2011-12-16 12:00:00 -05:00
+  comments: 
+- time_list: this Saturday
+  name: DC Chillin'
+  city: Washington, DC
+  contact_twitter: xeus@xeus.com
+  time_created: Fri Dec 09 21:39:18 -0500 2011
+  activity: dancing
+  id: 2
+  contact_phone: ""
+  organizers: Ben Turner
+  neighborhood: Adams Morgan
+  contact_list: email, twitter
+  author_id: 1
+  time_list_timestamp: 2011-12-17 12:00:00 -05:00
+  contact_email: test@test.com
+  comments: 

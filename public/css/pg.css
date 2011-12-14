@@ -1,0 +1,19 @@
+/* http://colorschemedesigner.com/#3x31Gw0w0w0w0 */
+
+BODY, INPUT, OPTION { font-family: 'Questrial', sans-serif; font-size: 14pt;}
+#toolbar { position: fixed; top: 0%; background-color: #a6c9e2; margin-left: 0px; margin-right: 0px; margin-top: 0px; left: 0%; right: 0%; padding: 0px; border-bottom-color: black; border-bottom-width: 1px; border-bottom-style: dotted; margin-bottom: 10px; }
+#toolbar TD { font-size: larger; }
+H1, H2, H3, H4 { display: inline; }
+
+A { color: #409300; }
+A:hover { color: #FFC040; }
+A:visited { color: #409300; }
+
+.navButton:hover { background-color: white; cursor: pointer; }
+.eventButton { font-size: 8pt; }
+.eventBox { border-color: black; border-style: dotted; border-width: 1px; background-color: #EEEEEE; padding: 5px; }
+.eventName { font-size: larger; font-weight: bold; }
+.eventMetadata { font-size: smaller; }
+
+.layoutTable TD { padding: 50px; }
+.layoutTable TD TD { padding: 5px; }

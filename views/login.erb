@@ -1,0 +1,53 @@
+<HTML>
+
+<HEAD>
+<%= header %>
+    <TITLE>probablyGonna :: login</TITLE>
+  	<STYLE TYPE="text/css">
+  		<!--
+  		
+  		// -->
+  	</STYLE>
+</HEAD>
+
+<BODY>
+
+<%= toolbar %>
+
+<H1>Login to probablyGonna</H1>
+
+    <form action="/login/check" method="post">
+      <p>
+        <label>Username: </label>
+        <input type="text" name="user_name"/>
+      </p>
+      <p>
+        <label>Password: </label>
+        <input type="password" name="password"/>
+      </p>
+      <p>
+        <input type="submit" name="login"/>
+      </p>
+    </form>
+
+<%= $footer %>
+
+<script type="text/javascript">
+
+$(function() {
+	$("#navAbout").click(function() {
+		window.location='/about';
+	});
+	$("#navEvents").click(function() {
+		window.location='/be';
+	});
+	$("#navPlan").click(function() {
+		window.location='/plan';
+	});
+});
+
+</script>
+
+</BODY>
+
+</HTML>
