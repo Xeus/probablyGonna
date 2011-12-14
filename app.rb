@@ -499,9 +499,11 @@ end
 
 get '/seed_db' do
   # run once to set records!
-  for i in (0..18)
-    records = Records.create(:id => i, :name => $positions[i])
-  end
+  user = User.new
+  user.name = Ben Turner
+  user.encrypted_password = "4442fa7b606dd57759110f4940f1ab0586074cdd"
+  user.time_created = "2011-12-14 11:31:43.938206 -05:00"
+  user.save
 end
 
 get_or_post '/add_neighborhood' do
