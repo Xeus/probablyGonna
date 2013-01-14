@@ -25,7 +25,7 @@ entries.
 
 enable :sessions
 
-APP_SECRET = "you are not your fucking khakis"  #this is the encryption key
+APP_SECRET = "YOUR_SECRET_KEY"  #this is the encryption key
 
 #a defines the helper function ##check_password!
 =begin
@@ -490,8 +490,8 @@ end
 get '/seed_db' do
   # run once to set records!
   user = User.new
-  user.name = "Ben Turner"
-  user.encrypted_password = "4442fa7b606dd57759110f4940f1ab0586074cdd"
+  user.name = "YOUR_NAME"
+  user.encrypted_password = "SET_YOUR_OWN_VALUE_HERE"
   user.time_created = "2011-12-14 11:31:43.938206 -05:00"
   user.save
   for i in (0..$neighborhoods_nyc)

@@ -1,5 +1,13 @@
 --- 
-- time_created: 2013-01-14 02:07:38.795600 -05:00
+- name: test
   id: 3
-  name: test
+  time_created: 2013-01-14 02:07:38.795600 -05:00
   encrypted_password: 4442fa7b606dd57759110f4940f1ab0586074cdd
+- name: ""
+  id: 2
+  time_created: 2013-01-14 02:52:33.812558 -05:00
+  encrypted_password: 76fb0eb046fb9e7b163fecdfaf0b3e419a8a503b
+- name: test
+  id: 3
+  time_created: 2013-01-14 02:52:43.261051 -05:00
+  encrypted_password: a91f164b89d39b31d1ee9e8c87c448e82eedf63d
