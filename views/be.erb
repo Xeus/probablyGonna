@@ -165,7 +165,7 @@ if !@event.all.empty?
 	for event in @event
 		%>
 <DIV CLASS="eventBox">
-<SPAN CLASS="eventName"><%= event.name %></SPAN> <button class="join<%= event.id %> eventButton" name="join<%= event.id %>"><% if (event.userlinks(:user_id => session[:user_id]) == nil) %>attending<% else %>join<% end %></button><button id="commentButton<%= event.id %>" class="commentButton eventButton" title="read comments">comments</button><BR />
+<SPAN CLASS="eventName"><%= event.name %></SPAN> <button class="join<%= event.id %> eventButton" name="join<%= event.id %>"><% if (event.attendees == nil) %>attending<% else %>join<% end %></button><button id="commentButton<%= event.id %>" class="commentButton eventButton" title="read comments">comments</button><BR />
 <%= event.activity %> in <%= event.neighborhood %>, <%= event.city %><BR />
 <!-- <%= event.address %><BR /> -->
 <%
@@ -224,6 +224,8 @@ No events are available.
 
 </DIV>
 
+<%= $footer %>
+
 </TD>
 <TD VALIGN=top WIDTH=300>
 
@@ -233,8 +235,6 @@ No events are available.
 
 </TD>
 </TR></TABLE></CENTER>
-
-<%= $footer %>
 
 <script type="text/javascript">
 

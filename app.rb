@@ -5,7 +5,7 @@ require 'chronic'
 require 'digest/sha1'
 #require 'dm-migrations'
 #require 'dm-aggregates'
-require 'dm-postgres-adapter'
+require 'dm-yaml-adapter'
 
 =begin
 
@@ -25,10 +25,10 @@ enable :sessions
 
 APP_SECRET = "you are not your fucking khakis"  #this is the encryption key
 
-#a defines the helper function #check_password!
+#a defines the helper function ##check_password!
 =begin
 helpers do 
-  def #check_password!
+  def ##check_password!
     auth = Rack::Auth::Basic::Request.new(request.env)
     if auth.provided? && auth.basic? && auth.credentials
       user = User.first(:conditions => {:name => auth.credentials[0]})
@@ -46,8 +46,22 @@ auth.credentials[1])
   end
 end
 =end
+=begin
+helpers do 
+  def #check_password!
+    if session[:encrypted_password] == Digest::SHA1.hexdigest(APP_SECRET + auth.credentials[1])
+      session[:user_name] = user.name
+      session[:user_id] = user.id
+      return true
+    else
+      #response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+      return false
+    end
+  end
+end
+=end
 
-DataMapper::setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
+DataMapper::setup(:default, {:adapter => 'yaml', :path => 'db'})
 
 class User
   include DataMapper::Resource
@@ -65,31 +79,6 @@ class User
   property :events_attended, Integer
   property :events_planned, Integer
   property :events_ditched, Integer
-
-  has n, :userlinks
-  has n, :events, :through => :userlinks
-end
-
-class Userlink
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :user_id, Integer
-  property :name, String
-  property :encrypted_password, Text
-  property :contact_email, String
-  property :contact_phone, String
-  property :contact_twitter, String
-  property :contact_anonymous, String
-  property :city, String
-  property :state, String
-  property :time_created, Time
-  property :events_attended, Integer
-  property :events_planned, Integer
-  property :events_ditched, Integer
-
-  belongs_to :event, :key => true
-  belongs_to :user, :key => true
 end
 
 # automatically create table
@@ -108,7 +97,7 @@ class Event
   property :author_id, Integer
   property :organizers, String
   property :location, String
-  #property :attendees, String
+  property :attendees, String
   property :contact_list, String
   property :contact_email, String
   property :contact_phone, String
@@ -121,8 +110,6 @@ class Event
   property :attendance, Integer
   property :occurred, String
   has n, :comments
-  has n, :userlinks
-  has n, :users, :through => :userlinks
 end
 
 #Event.auto_migrate! unless Event.storage_exists?
@@ -180,6 +167,7 @@ end
 
 $cities = ['New York', 'Washington, DC']
 $neighborhoods_nyc = ['East Village', 'Chinatown', 'Chelsea', 'SoHo', 'Gramercy', 'Upper East Side', 'Upper West Side', 'Midtown', 'Lower East Side', 'Alphabet City', 'Harlem', 'Hell\'s Kitchen']
+$neighborhoods_dc = ['Logan Circle', 'Dupont Circle', 'Georgetown', 'Glover Park', 'Burleith', 'Rosslyn', 'U Street', 'Columbia Heights', 'Anacostia', 'Waterfront',  'Capitol Hill', 'Cleveland Park', 'Van Ness']
 $activities = ['dancing', 'eating', 'drinking', 'hiking', 'a road trip', 'a concert', 'poker', 'a skill share', 'breakfast', 'lunch', 'dinner', 'brunch', 'other', 'food delivery']
 $contact = ['email', 'phone', 'twitter']
 $timeList = ['right now', 'tonight', 'today', 'tomorrow', 'this Friday', 'this Saturday', 'this Sunday', 'this weekend', 'next weekend']
@@ -364,7 +352,7 @@ get '/be/doing' do
 end
 
 get '/be/doing/:activity' do
-  #check_password!
+  ##check_password!
   if ($activities.include? params[:activity])
     @title = "probablyGonna be " + params[:activity]
     @event = Event.all(:activity => params[:activity])
@@ -436,7 +424,7 @@ user = User.new
 end
 
 get '/login' do
-  ##check_password!
+  #check_password!
   #redirect to '/be'
   erb :login
 end
@@ -453,7 +441,7 @@ post '/login/check' do
     session[:user_id] = getID.id
     redirect to '/be'
   else
-    response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+    #response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
     throw(redirect to '/register')
   end
   output
@@ -472,7 +460,7 @@ get '/user' do
 end
 
 get '/user/:userID' do
-  #check_password!
+  ##check_password!
 
   if User.get(params[:userID]) != nil
     @user = User.get(params[:userID])
@@ -483,17 +471,17 @@ get '/user/:userID' do
 end
 
 get '/admin' do
-  #check_password!
+  ##check_password!
   erb :admin
 end
 
 get '/' do
-  #check_password!
+  ##check_password!
   redirect to '/register'
 end
 
 get '/about' do
-  #check_password!
+  ##check_password!
   erb :about
 end
 
@@ -504,11 +492,18 @@ get '/seed_db' do
   user.encrypted_password = "4442fa7b606dd57759110f4940f1ab0586074cdd"
   user.time_created = "2011-12-14 11:31:43.938206 -05:00"
   user.save
+  for i in (0..$neighborhoods_nyc)
+    neighborhood = Cities.create(:id => i, :neighborhood => $neighborhoods_nyc[i])
+  end
+  for i in (0..$neighborhoods_dc)
+    neighborhood = Cities.create(:id => i, :neighborhood => $neighborhoods_dc[i])
+  end
+
 end
 
 get_or_post '/add_neighborhood' do
 
-  #check_password!
+  ##check_password!
 
   # Only if someone POSTed.
   if (params[:posted] == "true")
