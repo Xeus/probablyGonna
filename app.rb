@@ -1,3 +1,5 @@
+#!/usr/local/bin/ruby -w
+
 require 'rubygems'
 require 'sinatra'
 require 'dm-core'
