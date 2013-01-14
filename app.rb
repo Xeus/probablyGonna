@@ -191,8 +191,8 @@ end
 def header
 header = "    <link type=\"text/css\" href=\"/css/start/jquery-ui-1.8.16.custom.css\" rel=\"Stylesheet\" />\n"
 header += "  <link type=\"text/css\" href=\"/css/pg.css\" rel=\"Stylesheet\" />"
-header += "    <script type=\"text/javascript\" src=\"/js/jquery-1.6.2.min.js\"></script>\n"
-header += "    <script type=\"text/javascript\" src=\"/js/jquery-ui-1.8.16.custom.min.js\"></script>\n"
+header += "    <script type=\"text/javascript\" src=\"http://code.jquery.com/jquery.min.js\"></script>\n"
+header += "    <script type=\"text/javascript\" src=\"http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js\"></script>\n"
 header += "    <link href=\"http://fonts.googleapis.com/css?family=Questrial\" rel=\"stylesheet\" type=\"text/css\">\n"
 header
 end
